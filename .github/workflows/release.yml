@@ -11,8 +11,11 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-            contents: read
-            packages: write
+      contents: read
+      packages: write
+
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v3
@@ -37,5 +40,3 @@ jobs:
           
       - run: npm ci
       - run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
