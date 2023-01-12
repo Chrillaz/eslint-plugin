@@ -1,0 +1,33 @@
+{
+    "name": "@chrillaz/eslint-plugin",
+    "version": "1.0.0",
+    "main": "index.js",
+    "author": "Christoffer Öhman",
+    "license": "ISC",
+    "files": [
+        "configs"
+    ],
+    "publishConfig": {
+        "@chrillaz:registry": "https://npm.pkg.github.com"
+    },
+    "homepage": "https://github.com/Chrillaz/eslint-plugin/",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Chrillaz/eslint-plugin.git"
+    },
+    "bugs": {
+        "url": "https://github.com/Chrillaz/eslint-plugin/issues"
+    },
+    "peerDependencies": {
+        "eslint": ">=8"
+    },
+    "dependencies": {
+        "@chrillaz/prettier-config": "1.0.0",
+        "@typescript-eslint/eslint-plugin": "^5.37.0",
+        "@typescript-eslint/parser": "^5.37.0",
+        "eslint-config-prettier": "^8.5.0",
+        "eslint-plugin-prettier": "^4.2.1",
+        "eslint-plugin-react": "^7.31.8",
+        "eslint-plugin-react-hooks": "^4.6.0"
+    }
+}
