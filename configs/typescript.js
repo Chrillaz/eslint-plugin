@@ -1,8 +1,9 @@
-module.exports = {
+const { glob } = require('glob');
+const { realpathSync } = require('fs');
+
+const config = {
 	extends: [
-		'plugin:@chrillaz/eslint-plugin/recommended',
 		'plugin:@typescript-eslint/recommended',
-		'prettier',
 	],
 	files: [
 		'**/*.ts',
@@ -10,7 +11,16 @@ module.exports = {
 	],
 	parser: '@typescript-eslint/parser',
 	plugins: [
-		'@chrillaz',
 		'@typescript-eslint',
 	],
 };
+
+glob('**/tsconfig.json', { cwd: realpathSync(process.cwd) }, (error, matches) => {
+    if (!error) {
+        config.parserOptions = {
+            project: matches[0]
+        }
+    }
+});
+
+module.exports = config;
