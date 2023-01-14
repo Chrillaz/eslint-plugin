@@ -1,3 +1,5 @@
+const config = require('./config');
+const { glob } = require('glob');
 const { realpathSync } = require('fs');
 
 /**
@@ -16,29 +18,65 @@ function hasPackage(packageName) {
     }
 }
 
-const config = {
-	extends: [
-		'eslint:recommended',
-	],
-	rules: {
-		'block-spacing': 'error',
-		'function-paren-newline': [
-			'error',
-			'multiline-arguments',
-		],
-		'keyword-spacing': 'error',
-		'no-prototype-builtins': 'error',
-		'sort-imports': 'error',
-		'sort-keys': 'error',
-	},
-};
-
 if (hasPackage('typescript')) {
-	config.extends.push('plugin:@chrillaz/eslint-plugin/typescript')
+	config.settings['import/resolver'] = {
+        node: {
+            extensions: ['.js', '.tsx', '.ts', '.tsx']
+        }
+    };
+
+    config.extends.push('plugin:@typescript-eslint/recommended');
+    config.ignorePatterns.push('**/*.d.ts');
+    config.plugins.push('@typescript-eslint');
+    config.overrides.push(
+        {
+            files: [
+                '**/*.ts',
+                '**/*.tsx',
+            ],
+            parser: '@typescript-eslint/parser',
+        }
+    );
+
+    glob('**/tsconfig.json', { cwd: realpathSync(process.cwd) }, (error, matches) => {
+        if (!error) {
+            config.overrides[0].parserOptions = {
+                project: matches[0]
+            }
+        }
+    });
 }
 
 if (hasPackage('react')) {
-	config.extends.push('plugin:@chrillaz/eslint-plugin/react');
+    config.settings.react = {
+		version: 'detect',
+	};
+
+	config.extends.push('plugin:react/recommended');
+    config.plugins.push('react');
+	config.plugins.push('react-hooks');
+	config.parserOptions.ecmaFeatures = {
+		jsx: true,
+	};
+
+	config.rules = {
+        ...config.rules,
+		'react/prop-types': 'off',
+		'react-hooks/rules-of-hook': 'error',
+	};
+}
+
+if (hasPackage('prettier')) {
+    config.extends.push('prettier');
+    config.plugins.push('prettier');
+    config.rules = {
+        ...config.rules,
+        'prettier/prettier': ['error']
+    }
+
+    if (hasPackage('@chrillaz/prettier-config')) {
+        config.rules['prettier/prettier'].push(require('@chrillaz/prettier-config'));
+    }
 }
 
 module.exports = config;
