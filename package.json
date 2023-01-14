@@ -22,7 +22,7 @@
         "eslint": ">=8"
     },
     "dependencies": {
-        "@chrillaz/prettier-config": "1.0.0",
+        "@chrillaz/prettier-config": "1.1.0",
         "@typescript-eslint/eslint-plugin": "^5.37.0",
         "@typescript-eslint/parser": "^5.37.0",
         "eslint-config-prettier": "^8.5.0",
