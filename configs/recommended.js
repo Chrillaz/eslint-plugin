@@ -19,6 +19,7 @@ function hasPackage(packageName) {
 const config = {
 	env: {
 		node: true,
+        es6: true
 	},
 	extends: [
 		'eslint:recommended',
