@@ -1,3 +1,5 @@
+const { realpathSync } = require('fs');
+
 /**
  * Checks if package exists
  * 
@@ -6,7 +8,9 @@
  */
 function hasPackage(packageName) {
     try {
-        return Boolean(require.resolve(packageName));
+        return Boolean(require.resolve(packageName), {
+            paths: [realpathSync(process.cwd())]
+        });
     } catch ( error ) {
         return false;
     }
