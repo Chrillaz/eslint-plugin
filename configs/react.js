@@ -4,7 +4,10 @@ module.exports = {
             version: 'detect'
         }
     },
-    extends: ['plugin:react/recommended'],
+    extends: [
+        'plugin:react/recommended',
+        'plugin:react-hooks/recommended'
+    ],
     plugins: ['react', 'react-hooks'],
     parserOptions: {
         ecmaFeatures: {
@@ -13,6 +16,6 @@ module.exports = {
     },
     rules: {
         'react/prop-types': 'off',
-        'react-hooks/rules-of-hook': 'error',
+        'react-hooks/rules-of-hooks': 'error',
     }
 };
