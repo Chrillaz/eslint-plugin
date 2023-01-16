@@ -23,7 +23,7 @@ const config = {
     ]
 }
 
-glob('**/tsconfig.json', { cwd: realpathSync(process.cwd) }, (error, matches) => {
+glob('**/tsconfig.json', { cwd: realpathSync(process.cwd()) }, (error, matches) => {
     if (!error) {
         config.overrides[0].parserOptions = {
             project: matches[0]
