@@ -46,11 +46,14 @@ if (hasPackage('prettier')) {
     config.plugins.push('prettier');
     config.rules = {
         ...config.rules,
-        'prettier/prettier': ['error']
+        'prettier/prettier': 'error'
     }
 
     if (hasPackage('@chrillaz/prettier-config')) {
-        config.rules['prettier/prettier'].push(require('@chrillaz/prettier-config'));
+        config.rules['prettier/prettier'] = [
+            config.rules['prettier/prettier'],
+            require('@chrillaz/prettier-config')
+        ]
     }
 }
 
